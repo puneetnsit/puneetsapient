@@ -1,0 +1,27 @@
+<%@page import="com.day.cq.wcm.foundation.Image"%>
+<%
+String homePage="";
+	Page parentPage=currentPage.getAbsoluteParent(2);
+	if(parentPage==null){
+		homepage = currentPage.getPath();
+	} else {
+		homePage = parentPage.getPath();
+	}
+%>
+<a href="<%=homePage%>.html"> <%
+ 	log.error("path is : " + currentStyle.getPath());
+ 	Resource imageResource = resourceResolver.getResource(currentStyle
+ 			.getPath());
+ 	if (imageResource != null) {
+ 		Image image = new Image(imageResource);
+ 		if (!image.hasContent()) {
+ %>Home Page<%
+ 	} else {
+ 			image.setSelector(".img");
+ 			image.draw(out);
+ 		}
+ 	} else {
+ %>Home Page<%
+ 	}
+ %>
+</a>

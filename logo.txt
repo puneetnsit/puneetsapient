@@ -1,0 +1,25 @@
+<%@include file="/libs/foundation/global.jsp"%><%
+%><%@ page import="com.day.cq.wcm.foundation.Image" %><%
+    Page homePage = currentPage.getAbsoluteParent(2);
+    if (homePage == null)
+    {
+        homePage = currentPage;
+    }
+%><a href="<%= homePage.getPath() %>.html"><%
+    Resource imageResource = resourceResolver.getResource(currentStyle.getPath());
+    if (imageResource != null)
+    {
+        Image image = new Image(imageResource);
+    
+        if (image.hasContent())
+        {
+            image.setSelector(".img");
+            image.draw(out);
+        }
+    } else
+    {
+        %>Home<%
+    }
+    %></a>
+    
+    
